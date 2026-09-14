@@ -36,8 +36,9 @@
   document.querySelectorAll("img.icon").forEach(inlineIcon);
 
   var links = document.querySelectorAll("nav.main-nav a");
-  var here = location.pathname.split("/").pop() || "index.html";
+  var here = location.pathname.replace(/\/$/, "") || "/";
   links.forEach(function (link) {
-    if (link.getAttribute("href") === here) link.classList.add("active");
+    var href = link.getAttribute("href").replace(/\/$/, "") || "/";
+    if (href === here) link.classList.add("active");
   });
 })();
