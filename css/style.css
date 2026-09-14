@@ -424,7 +424,8 @@ h1.page-title {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 4px 12px;
 }
 
 .exp-entry .exp-role {
