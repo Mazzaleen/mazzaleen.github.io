@@ -48,11 +48,11 @@
   var typewriterEl = document.getElementById("typewriter-text");
   if (typewriterEl) {
     var greetings = [
-      { text: "Hi! I'm Mazine Suliman", dir: "ltr" },
-      { text: "مرحبًا! أنا Mazine Suliman", dir: "rtl" },
-      { text: "¡Hola! Soy Mazine Suliman", dir: "ltr" },
-      { text: "Olá! Sou Mazine Suliman", dir: "ltr" },
-      { text: "Salut ! Je suis Mazine Suliman", dir: "ltr" },
+      { text: "Hi! I'm Mazine", dir: "ltr" },
+      { text: "مرحبًا! أنا مازن", dir: "rtl" },
+      { text: "¡Hola! Soy Mazine", dir: "ltr" },
+      { text: "Olá! Sou Mazine", dir: "ltr" },
+      { text: "Salut ! Je suis Mazine", dir: "ltr" },
     ];
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
