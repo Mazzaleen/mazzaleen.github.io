@@ -41,4 +41,70 @@
     var href = link.getAttribute("href").replace(/\/$/, "") || "/";
     if (href === here) link.classList.add("active");
   });
+
+  // Typewriter greeting: cycles the name through several languages,
+  // typing and backspacing in a loop. Skipped entirely for
+  // prefers-reduced-motion — shows the plain English greeting instead.
+  var typewriterEl = document.getElementById("typewriter-text");
+  if (typewriterEl) {
+    var greetings = [
+      { text: "Hi! I'm Mazine Suliman", dir: "ltr" },
+      { text: "مرحبًا! أنا Mazine Suliman", dir: "rtl" },
+      { text: "¡Hola! Soy Mazine Suliman", dir: "ltr" },
+      { text: "Olá! Sou Mazine Suliman", dir: "ltr" },
+      { text: "Salut ! Je suis Mazine Suliman", dir: "ltr" },
+    ];
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      typewriterEl.textContent = greetings[0].text;
+    } else {
+      var nameHeading = document.getElementById("typewriter-name");
+      var index = 0;
+      var TYPE_MS = 55;
+      var DELETE_MS = 28;
+      var HOLD_MS = 1800;
+
+      function typePhrase(phrase, onDone) {
+        var i = 0;
+        nameHeading.dir = phrase.dir;
+        (function step() {
+          typewriterEl.textContent = phrase.text.slice(0, i);
+          i++;
+          if (i <= phrase.text.length) {
+            setTimeout(step, TYPE_MS);
+          } else {
+            onDone();
+          }
+        })();
+      }
+
+      function deletePhrase(phrase, onDone) {
+        var i = phrase.text.length;
+        (function step() {
+          typewriterEl.textContent = phrase.text.slice(0, i);
+          i--;
+          if (i >= 0) {
+            setTimeout(step, DELETE_MS);
+          } else {
+            onDone();
+          }
+        })();
+      }
+
+      function cycle() {
+        var phrase = greetings[index];
+        typePhrase(phrase, function () {
+          setTimeout(function () {
+            deletePhrase(phrase, function () {
+              index = (index + 1) % greetings.length;
+              cycle();
+            });
+          }, HOLD_MS);
+        });
+      }
+
+      cycle();
+    }
+  }
 })();
